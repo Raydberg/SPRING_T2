@@ -17,10 +17,13 @@ import java.util.Optional;
 public class OrdenesController {
     @Autowired
     OrdenesServiceImp serviceOrden;
+    @Autowired
+    LibrosServiceImp librosService;
     @GetMapping("/ordenes")
     public String obtenerOrdenes(Model model) {
         model.addAttribute("ordenes", serviceOrden.listarOrdenes());
         model.addAttribute("orden", new Ordenes());
+        model.addAttribute("libros", librosService.listarLibros());
         return "ordenes";
     }
 
@@ -40,6 +43,7 @@ public class OrdenesController {
         Optional<Ordenes> optionalOrden = serviceOrden.buscarOrden(id);
         if (optionalOrden.isPresent()) {
             model.addAttribute("orden", optionalOrden.get());
+            model.addAttribute("libros", librosService.listarLibros());
             return "FormOrder";
         } else {
             return "redirect:/ordenes";

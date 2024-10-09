@@ -63,8 +63,11 @@
                         <input type="text" class="form-control" id="titulo" th:field="*{clienteId}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="nameAuthor" class="form-label">Id Libro</label>
-                        <input type="text" class="form-control" id="nameAuthor" th:field="*{libros.id}" required>
+                        <label for="libroId" class="form-label">Id Libro</label>
+                        <select class="form-control" id="libroId" th:field="*{libros.id}" required>
+                            <option value="" disabled selected>Seleccione un libro</option>
+                            <option th:each="libro : ${libros}" th:value="${libro.id}" th:text="${libro.id}"></option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="lastNameAuthor" class="form-label">Fecha de Orden</label>
@@ -73,8 +76,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-outline-primary">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -103,8 +106,8 @@
                 <td th:text="${orden.libros.id}"></td>
                 <td th:text="${orden.orderDate}"></td>
                 <td>
-                    <a th:href="@{'/editarOrden/' + ${orden.id}}" class="btn btn-primary">Editar</a>
-                    <a th:href="@{'/eliminarOrden/' + ${orden.id}}" class="btn btn-danger">Eliminar</a>
+                    <a th:href="@{'/editarOrden/' + ${orden.id}}" class="btn btn-outline-primary">Editar</a>
+                    <a th:href="@{'/eliminarOrden/' + ${orden.id}}" class="btn btn-outline-danger">Eliminar</a>
                 </td>
             </tbody>
         </table>

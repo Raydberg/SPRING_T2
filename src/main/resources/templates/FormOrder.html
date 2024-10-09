@@ -53,7 +53,7 @@
 <section class="section mt-5" id="review">
     <div class="container text-center mt-5">
         <h2 class="mb-4">Editar Orden</h2>
-        <form class="bg-light p-4 rounded shadow-sm" th:action="@{/editarOrden/{id}(id=${orden.id})}" th:object="${orden}" method="post">
+        <form class="bg-light p-4 rounded shadow-sm mx-auto" th:action="@{/editarOrden/{id}(id=${orden.id})}" th:object="${orden}" method="post" style="max-width: 600px;">
             <input th:field="*{id}" type="hidden">
             <div class="mb-3">
                 <label for="editTitulo" class="form-label">ID Cliente</label>
@@ -61,30 +61,27 @@
             </div>
             <div class="mb-3">
                 <label for="editAutor" class="form-label">ID Libro</label>
-                <input type="text" class="form-control shadow-sm" id="editAutor" th:field="*{libros.id}" placeholder="Ingrese el ID del libro" required>
+                <select class="form-control shadow-sm" id="editAutor" th:field="*{libros.id}" required>
+                    <option value="" disabled selected>Seleccione un libro</option>
+                    <option th:each="libro : ${libros}" th:value="${libro.id}" th:text="${libro.id}"></option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="editAnio" class="form-label">Fecha de Orden</label>
                 <input type="date" class="form-control shadow-sm" id="editAnio" th:field="*{orderDate}" required>
             </div>
-
-            <div class="modal-footer mt-4">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <div class="d-flex justify-content-end mt-4">
+                <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             </div>
         </form>
     </div>
 </section>
-
-<!-- core  -->
 <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
 <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
-<!-- bootstrap 3 affix -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-
-<!-- Rubic js -->
 <script src="assets/js/rubic.js"></script>
 
 </body>
