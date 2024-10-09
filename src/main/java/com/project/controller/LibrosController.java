@@ -44,7 +44,7 @@ public class LibrosController {
         Optional<Libros> libro = service.buscarLibro(id);
         if (libro.isPresent()) {
             model.addAttribute("libro", libro.get());
-            return "Form"; // Redirige a Form.html
+            return "Form"; 
         } else {
             return "redirect:/libros";
         }
