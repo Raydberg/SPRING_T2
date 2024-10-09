@@ -41,13 +41,48 @@
                     <a class="nav-link" th:href="@{/}">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-primary text-dark shadow-none ml-md-4"
-                       th:href="@{/}">Crear Nueva Orden</a>
+                    <a class="nav-link btn btn-primary text-dark shadow-none ml-md-4" href="#" data-bs-toggle="modal"
+                       data-bs-target="#crearLibroModal">Crear nueva Orden</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+<div class="modal fade" id="crearLibroModal" tabindex="-1" aria-labelledby="crearLibroModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearLibroModalLabel">Crear Nuevo Libro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/agregarOrden}" th:object="${orden}" method="post">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Id Cliente</label>
+                        <input type="text" class="form-control" id="titulo" th:field="*{clienteId}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nameAuthor" class="form-label">Id Libro</label>
+                        <input type="text" class="form-control" id="nameAuthor" th:field="*{libros.id}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastNameAuthor" class="form-label">Fecha de Orden</label>
+                        <input type="date" class="form-control" id="lastNameAuthor" th:field="*{orderDate}"
+                               required>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <section class="section" id="pricing">
     <div class="container text-center">
         <h1 class="display-4 has-line">Ordenes</h1>
@@ -68,14 +103,22 @@
                 <td th:text="${orden.libros.id}"></td>
                 <td th:text="${orden.orderDate}"></td>
                 <td>
-                    <a th:href="@{'/ordenes/' + ${orden.id} + '/editar'}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{'/editarOrden/' + ${orden.id}}" class="btn btn-primary">Editar</a>
                     <a th:href="@{'/eliminarOrden/' + ${orden.id}}" class="btn btn-danger">Eliminar</a>
                 </td>
             </tbody>
         </table>
     </div>
 </section>
+<script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+<script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+<!-- bootstrap 3 affix -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
+<!-- Rubic js -->
+<script src="assets/js/rubic.js"></script>
 </body>
 
 </html>
